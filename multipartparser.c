@@ -20,27 +20,6 @@
             goto error;                                 \
     }
 
-enum state {
-    s_preamble,
-    s_preamble_hy_hy,
-    s_first_boundary,
-    s_header_field_start,
-    s_header_field,
-    s_header_value_start,
-    s_header_value,
-    s_header_value_cr,
-    s_headers_done,
-    s_data,
-    s_data_cr,
-    s_data_cr_lf,
-    s_data_cr_lf_hy,
-    s_data_boundary_start,
-    s_data_boundary,
-    s_data_boundary_done,
-    s_data_boundary_done_cr_lf,
-    s_data_boundary_done_hy_hy,
-    s_epilogue,
-};
 
 /* Header field name as defined by rfc 2616. Also lowercases them.
  *     field-name   = token

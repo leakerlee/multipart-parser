@@ -14,12 +14,35 @@ typedef struct multipartparser_callbacks multipartparser_callbacks;
 typedef int (*multipart_cb) (multipartparser*);
 typedef int (*multipart_data_cb) (multipartparser*, const char* data, size_t size);
 
+enum state {
+    s_preamble,
+    s_preamble_hy_hy,
+    s_first_boundary,
+    s_header_field_start,
+    s_header_field,
+    s_header_value_start,
+    s_header_value,
+    s_header_value_cr,
+    s_headers_done,
+    s_data,
+    s_data_cr,
+    s_data_cr_lf,
+    s_data_cr_lf_hy,
+    s_data_boundary_start,
+    s_data_boundary,
+    s_data_boundary_done,
+    s_data_boundary_done_cr_lf,
+    s_data_boundary_done_hy_hy,
+    s_epilogue,
+};
+
 struct multipartparser {
     /** PRIVATE **/
     char        boundary[70];
     int         boundary_length;
     int         index;
-    uint16_t    state;
+    //uint16_t    state;
+    enum state    state;
 
     /** PUBLIC **/
     void* data;
